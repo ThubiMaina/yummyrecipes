@@ -13,13 +13,10 @@
                 <nav>
                     <ul class="nav nav-pills float-right">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="signup.html">Signup</a>
+                            <a class="nav-link" href="login.html">Logout</a>
                         </li>
                     </ul>
                 </nav>
@@ -27,12 +24,26 @@
             </div>
             <hr>
             <div class="jumbotron">
-                <h2 class="display-3">Yummy Recipes</h2>
-                <p class="lead">Yummy recipes provides a platform for users to keep track of their awesome recipes and share with others if they so wish.</p>
-                <p>We believe in people who believe in themselves.</p>
-                <p>We identify people who take ownership for their own recipes.</p>
-                <p>We assess people for values-alignment in the areas of excellence, passion and originality.</p>
-                <p><a class="btn btn-lg btn-success" href="signup.html" role="button">Sign up today</a></p>
+                <div class="panel panel-info col-sm-offset-3 col-sm-6">	
+                    <h5>Add New Category</h5>
+                        <form action="" class="form-horizontal" method="" name="shoplistadd">
+                            <div class="form-group" style="margin-top:10px;">
+                                <div class="col-sm-offset-2 col-sm-8">
+                                    <input type="text" class="form-control" value="" name="catname" autocomplete="off" autofocus required/>
+                                </div>
+                            </div>
+                            <div class="col-sm-offset-7 col-sm-10">
+                                <button type="submit" name="add" class="btn btn-success">Add</button>
+                            </div>
+                        </form>
+                    <h5>My Categories</h5>
+                        <div>
+                            <ul class="">
+                                <li><a href="recipe.html"> 1. Breakfast</a>   <a href="">  delete</a></li>
+                                <li><a href="recipe.html"> 2. Coffee</a>    <a href="">  delete</a></li>
+                            </ul>
+                        </div>    
+                </div>
             </div>
             <footer class="footer">
                 <p>&copy; YummyRecipes 2017</p>
