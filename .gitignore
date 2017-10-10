@@ -1,0 +1,4 @@
+recipe
+__Pycache__/*
+app/__Pycache__/*
+.vscode
