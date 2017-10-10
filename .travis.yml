@@ -1,8 +1,11 @@
-sudo: false
 language: python
 python:
   - 3.6.2
-script: nosetests --with-coverage
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls  
+script:
+  - nosetests --with-coverage
+  - py.test --cov=yummyrecipes tests/*
 after_success:
-  - codeclimate-test-reporter
-  - coveralls
+  coveralls
