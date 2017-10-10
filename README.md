@@ -25,13 +25,13 @@ The innovative Yummy recipes application provides a platform for users to keep t
 
 3. Navigate appropriately from the index page to the various UI pages using links provided
 
-![Login UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/login.html)
+* [Login UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/login.html)
 
-![Signup UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/signup.html)
+* [Signup UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/signup.html)
 
-![Category UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/category.html)
+* [Category UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/category.html)
 
-![Recipe UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/recipe.html)
+* [Recipe UI](https://github.com/Stivinn/yummyrecipes/blob/challenge1/designs/UI/recipe.html)
 
 4. You app should look similar to this - [https://stivinn.github.io/index.html](https://stivinn.github.io/index.html)
 
