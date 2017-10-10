@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Stivinn/yummyrecipes.svg?branch=challenge2)](https://travis-ci.org/Stivinn/yummyrecipes)
-
+[![Coverage Status](https://coveralls.io/repos/github/Stivinn/yummyrecipes/badge.svg?branch=challenge2)](https://coveralls.io/github/Stivinn/yummyrecipes?branch=challenge2)
 
 # Yummy Recipes
 
