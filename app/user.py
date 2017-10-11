@@ -25,7 +25,7 @@ class User():
                     regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+$)"
                     if re.search(regex, email):
                         if email not in USERS.keys():
-                            return True
+                            return 1
                     message = "Enter a valid email"
                     return message
                 message = "email length too big"
@@ -42,7 +42,7 @@ class User():
                 passlength = len(password)
                 if passlength >= 6 and passlength <= 25:
                     if password == cpassword:
-                        return True
+                        return 1
                     message "confirm password coreectly"
                     return message
                 message = "min 6 and max 25 characters"
@@ -58,7 +58,7 @@ class User():
             if len(newname) == len(username):
                 namelength = len(username)
                 if namelength >= 6 and namelength <= 25:
-                    return True
+                    return 1
                 message = "min 6 and max 25 characters"
                 return message
             message = return "Remove Trailing whitespaces from username"
@@ -69,16 +69,15 @@ class User():
     def create(self, email, username, password, cpassword):
         """ Method for creating a user"""
         check_email = self.check_email(email)
-        if check_email is True:
+        if check_email == 1:
             check_username = self.check_username(username)
-            if check_username is True:
+            if check_username == 1:
                 check_password = self.check_password(password, cpassword)
-                if check_password is True:
+                if check_password == 1:
                     USERS[email] = [username, password]
                     result = email in USERS.keys()
                     if result is True:
-                        message = "Registration Successfull"
-                        return message
+                        return 1
                     message = "Failed to create user"
                     return message
                 return check_password
