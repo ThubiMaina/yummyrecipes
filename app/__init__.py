@@ -4,15 +4,14 @@
 # Load Flask
 from flask import Flask
 
-# Load the views
-from app import views
-
 # Initialize the app
 # set instance_relative_config to True,
 # use app.config.from_object('config') to load the config.py file.
 
-APP = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__, instance_relative_config=True)
 
+# Load the views
+from app import views
 
 # Load the config file
-APP.config.from_object('config')
+app.config.from_object('config')
