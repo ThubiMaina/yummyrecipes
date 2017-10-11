@@ -29,8 +29,10 @@ class User():
                 len(newpass) == len(password) and
                 len(newcpass) == len(cpassword)
             ):
-                if email not in USERS.keys()
-
+                if email not in USERS.keys():
+                    if password == cpassword:
+                    
+                    return 4    
                 return 3
             return 2
         return 1
