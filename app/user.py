@@ -33,11 +33,12 @@ class User():
                 regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+$)"
                 if re.search(regex, email):
                     nameLength = len(username)
-                    if nameLength >= 6 and namelength <= 25:  
+                    if nameLength >= 6 and namelength <= 25:
                         passlength = len(password)
+                        if passLength >= 6 and passlength <= 25:
+
+                        return 5
                     return 4
-                    
-                    passlength = len(password)
                     if email not in USERS.keys():
                         if password == cpassword:
                     
