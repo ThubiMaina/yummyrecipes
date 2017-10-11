@@ -1,4 +1,5 @@
 """ create user accounts and enable user to login"""
+import re
 
 USERS = {}
 
@@ -29,8 +30,16 @@ class User():
                 len(newpass) == len(password) and
                 len(newcpass) == len(cpassword)
             ):
-                if email not in USERS.keys():
-                    if password == cpassword:
+                regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+$)"
+                if re.search(regex, email):
+                    nameLength = len(username)
+                    if nameLength >= 6 and namelength <= 25:  
+                        passlength = len(password)
+                    return 4
+                    
+                    passlength = len(password)
+                    if email not in USERS.keys():
+                        if password == cpassword:
                     
                     return 4    
                 return 3
