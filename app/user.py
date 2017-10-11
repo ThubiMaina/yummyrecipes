@@ -36,12 +36,12 @@ class User():
                     if nameLength >= 6 and namelength <= 25:
                         passlength = len(password)
                         if passLength >= 6 and passlength <= 25:
+                            if email not in USERS.keys():
+                                if password == cpassword:
 
+                                return 7   
+                            return 6
                         return 5
-                    return 4
-                    if email not in USERS.keys():
-                        if password == cpassword:
-                    
                     return 4    
                 return 3
             return 2
