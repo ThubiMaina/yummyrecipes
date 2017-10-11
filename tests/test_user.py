@@ -44,8 +44,32 @@ class TestUser(unittest.TestCase):
         result = self.new_user.create('maua@mail.com', 'Earths', 'plutos', '')
         self.assertEqual(1, result, "Confirm Password empty")
     
-    
-   
+    def test_trailing_whitespace(self):
+        """ method to test if inputs have trailing whitespaces"""
+        result = self.new_user.create(' maua@mail.com ', ' Earths ', ' plutos ', ' plutos ')
+        self.assertEqual(2, result, "Trailing Whitespaces available")
+
+    def test_email_trailing_whitespace(self):
+        """ method to test if email has trailing whitespaces"""
+        result = self.new_user.create('maua@mail.com ', ' Earths ', 'plutos ', 'plutos ')
+        self.assertEqual(2, result, "Username has trailing Whitespaces")
+
+    def test_username_has_trailing_whitespace(self):
+        """ method to test if password has trailing whitespaces"""
+        result = self.new_user.create('maua@mail.com ', ' Earths ', 'plutos ', 'plutos ')
+        self.assertEqual(2, result, "Username has trailing Whitespaces")
+
+    def test_password_trailing_whitespace(self):
+        """ method to test if email has trailing whitespaces"""
+        result = self.new_user.create(' maua@mail.com ', 'Earths ', ' plutos ', 'plutos ')
+        self.assertEqual(2, result, "Password has trailing Whitespaces")
+
+    def test_cpassword_trailing_whitespace(self):
+        """ method to test if email has trailing whitespaces"""
+        result = self.new_user.create(' maua@mail.com ', 'Earths ', 'plutos ', ' plutos ')
+        self.assertEqual(2, result, "Cpassword has trailing Whitespaces")        
+
+        
 
     def test_create_user(self):
         """ method to test for success in creating user account"""
