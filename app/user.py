@@ -17,6 +17,7 @@ class User():
         self.cpassword = cpassword
 
     def create(self, email, username, password, cpassword):
-        USERS[email] = [username, password]
-        result = email in USERS
-        return result
+        if email != '' and username != '' and password != '' and cpassword != '':
+            return 10
+        return 1
+
