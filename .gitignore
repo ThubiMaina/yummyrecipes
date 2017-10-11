@@ -1,4 +1,5 @@
 recipe
 __Pycache__/*
 app/__Pycache__/*
+tests/__Pycache__/*
 .vscode
