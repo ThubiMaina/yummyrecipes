@@ -20,6 +20,18 @@
             </div>
             <hr>
             <div class="jumbotron">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class=flashes>
+                        {% for message in messages %}
+                            <li style=color:#6868EC>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                {% if error %}
+                    <p style=color:red><strong>Error:</strong> {{ error }} </p>
+                {% endif %}
                 {% block body %}
                 {% endblock %}
             </div>
