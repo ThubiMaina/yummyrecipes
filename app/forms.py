@@ -11,9 +11,9 @@ it renders <input type="hidden">
 >>>Validators simply takes an input, verifies it fulfills some criterion,
 such as a maximum length for a string and returns
 """
-
+from flask_wtf import Form
 from wtforms import (
-    Form, StringField, PasswordField, HiddenField,
+    StringField, PasswordField, HiddenField,
     TextAreaField, validators
 )
 
