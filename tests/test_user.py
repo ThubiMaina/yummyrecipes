@@ -19,9 +19,15 @@ class TestUser(unittest.TestCase):
         min 6.
         max length
         """
+    def test_all_inputs_are_empty(self):
+        """ method to test if input fields are empty"""
+        result = self.new_user.create('', '', '', '')
+        self.assertEqual(1, result, "Input fields empty")
+
     def test_create_user(self):
         """ method to test for success in creating user account"""
         user_details = self.new_user.create(
             'maua@gmail.com', 'Peter', 'patpass', 'patpass')
         self.assertTrue(user_details, "User succesfully created")
+    
     
