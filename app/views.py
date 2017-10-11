@@ -24,14 +24,15 @@ def register():
     form = RegistrationForm(request.form)
     error = None
     if request.method == 'POST' and form.validate():
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        cpassword = request.form['cpassword']
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        cpassword = form.confirm.data
         reg = NEWUSER.create(email, username, password, cpassword)
         if reg == 1:
             flash('Registration Successfull.Proceed to Login')
             return redirect(url_for('login'))
-        error = reg
-        return redirect(url_for('register'))
+        else:
+            error = reg
+            return render_template('index.html', error=error)
     return render_template('signup.html', form=form)
