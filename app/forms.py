@@ -13,7 +13,7 @@ such as a maximum length for a string and returns
 """
 
 from wtforms import (
-    Form, StringField, EmailField, PasswordField, HiddenField,
+    Form, StringField, PasswordField, HiddenField,
     TextAreaField, validators
 )
 
@@ -30,7 +30,7 @@ class RegistrationForm(Form):
         validators.Length(min=6, max=25),
         validators.InputRequired("Username cannot be blank.")
     ])
-    email = EmailField('Email Address', [
+    email = StringField('Email Address', [
         validators.Length(min=6, max=50),
         validators.InputRequired("email address cannot be blank."),
         validators.Email("This field requires a valid email address")
