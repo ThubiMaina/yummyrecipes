@@ -35,3 +35,8 @@ class RegistrationForm(Form):
         validators.InputRequired("email address cannot be blank."),
         validators.Email("This field requires a valid email address")
     ])
+    password = PasswordField('Password', [
+        validators.Length(min=6, max=50),
+        validators.InputRequired("Password cannot be blank."),
+    ])
+
