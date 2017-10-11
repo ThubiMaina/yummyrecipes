@@ -25,7 +25,9 @@ class User():
                     regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+$)"
                     if re.search(regex, email):
                         if email not in USERS.keys():
-                            return 1
+                            return 1  
+                        message = "Email already in use"
+                        return message
                     message = "Enter a valid email"
                     return message
                 message = "email length too big"
