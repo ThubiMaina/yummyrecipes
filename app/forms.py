@@ -30,3 +30,8 @@ class RegistrationForm(Form):
         validators.Length(min=6, max=25),
         validators.InputRequired("Username cannot be blank.")
     ])
+    email = EmailField('Email Address', [
+        validators.Length(min=6, max=50),
+        validators.InputRequired("email address cannot be blank."),
+        validators.Email("This field requires a valid email address")
+    ])
