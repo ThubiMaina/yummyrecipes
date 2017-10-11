@@ -17,3 +17,16 @@ from wtforms import (
     TextAreaField, validators
 )
 
+
+class RegistrationForm(Form):
+    """Registration form with the following field properties:
+    Attributes:
+        username: A string representing the user's name.
+        email: A string representing the user's unique email address.
+        password: A string representing the user's password.
+        confirm: A string confirming entered password.
+    """
+    username = StringField('Username', [
+        validators.Length(min=6, max=25),
+        validators.InputRequired("Username cannot be blank.")
+    ])
