@@ -11,6 +11,7 @@ it renders <input type="hidden">
 >>>Validators simply takes an input, verifies it fulfills some criterion,
 such as a maximum length for a string and returns
 """
+
 from flask_wtf import Form
 from wtforms import (
     StringField, PasswordField, HiddenField,
@@ -36,11 +37,11 @@ class RegistrationForm(Form):
         validators.Email("This field requires a valid email address")
     ])
     password = PasswordField('Password', [
-        validators.Length(min=6, max=50),
+        validators.Length(min=6, max=25),
         validators.InputRequired("Password cannot be blank."),
     ])
     confirm = PasswordField('Confirm Password', [
-        validators.Length(min=6, max=50),
+        validators.Length(min=6, max=25),
         validators.InputRequired("Password cannot be blank."),
         validators.EqualTo('password', message='Passwords must match')
     ])
