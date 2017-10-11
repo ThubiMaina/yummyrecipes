@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <title>YummyRecipes</title>
+        <link href="../static/bootstrap.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills float-right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        {% block navbar %}
+                        {% endblock %}
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Yummy Recipes</h3>
+            </div>
+            <hr>
+            <div class="jumbotron">
+                {% block body %}
+                {% endblock %}
+            </div>
+            <footer class="footer">
+                <p>&copy; YummyRecipes 2017</p>
+            </footer>
+        </div>
+    </body>
+</html>       
