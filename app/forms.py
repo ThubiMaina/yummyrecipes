@@ -39,4 +39,9 @@ class RegistrationForm(Form):
         validators.Length(min=6, max=50),
         validators.InputRequired("Password cannot be blank."),
     ])
+    confirm = PasswordField('Confirm Password', [
+        validators.Length(min=6, max=50),
+        validators.InputRequired("Password cannot be blank."),
+        validators.EqualTo('password', message='Passwords must match')
+    ])
 
