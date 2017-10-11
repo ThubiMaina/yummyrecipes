@@ -12,13 +12,14 @@
 </li>
 {% endblock %}
 {% block body %}
-<form action="" class="form-horizontal" method="post">
+<h1>Signup</h1>
+<form action="" class="form-horizontal" method="POST">
   <dl>
     {{ render_field(form.username) }}
     {{ render_field(form.email) }}
     {{ render_field(form.password) }}
     {{ render_field(form.confirm) }}
   </dl>
-  <p><input type="submit" name="register" value="Register">
+  <p><input type="submit" value="Register"></p>
 </form>
 {% endblock %}
