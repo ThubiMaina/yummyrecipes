@@ -17,7 +17,19 @@ class User():
         self.cpassword = cpassword
 
     def create(self, email, username, password, cpassword):
+        
         if email != '' and username != '' and password != '' and cpassword != '':
-            return 10
+            newmail = email.strip()
+            newname = username.strip()
+            newpass = password.strip()
+            newcpass = cpassword.strip()
+            if (
+                len(newmail) == len(email) and
+                len(newname) == len(username) and
+                len(newpass) == len(password) and
+                len(newcpass) == len(cpassword)
+            ):
+                return 10
+            return 2
         return 1
 
