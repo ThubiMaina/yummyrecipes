@@ -43,7 +43,7 @@ class User():
                 if passlength >= 6 and passlength <= 25:
                     if password == cpassword:
                         return 1
-                    message "confirm password coreectly"
+                    message = "confirm password coreectly"
                     return message
                 message = "min 6 and max 25 characters"
                 return message
@@ -61,9 +61,9 @@ class User():
                     return 1
                 message = "min 6 and max 25 characters"
                 return message
-            message = return "Remove Trailing whitespaces from username"
+            message = "Remove Trailing whitespaces from username"
             return message
-        message = return "Username should not be blank"
+        message = "Username should not be blank"
         return message
 
     def create(self, email, username, password, cpassword):
