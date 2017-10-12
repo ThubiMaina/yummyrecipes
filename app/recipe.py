@@ -18,13 +18,13 @@ class Recipe():
         self.catid = catid
         self.recipeid = recipeid
 
-    def create_recipe(self, catid, recipeid, recipename, ingridients, process):
+    def create_recipe(self, catid, recipename, ingridients, process):
         """ Method for creating a recipes for a particular category"""
         size = len(RECIPE)
         self.recipeid = size
         return RECIPE.insert(self.recipeid, {
             'catid': catid,
-            'recipeid': recipeid,
+            'recipeid': self.recipeid,
             'recipename': recipename,
             'ingridients': ingridients,
             'process': process
@@ -42,11 +42,11 @@ class Recipe():
 
     @staticmethod
     def delete_recipe(recipeid):
-        """Delete the category from the global list"""
+        """Delete the recipe from the global list"""
         RECIPE.pop(recipeid)
 
     def update_recipe(self, catid, recipeid, recipename, ingridients, process):
-        """Update the category with the new inputs"""
+        """Update the recipe with the new inputs"""
         self.recipeid = recipeid
         return RECIPE.insert(self.recipeid, {
             'catid': catid,
@@ -55,4 +55,3 @@ class Recipe():
             'ingridients': ingridients,
             'process': process
         })
-
