@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request, flash
+from flask import render_template, url_for, redirect, request, flash, session
 
 from app import app
 from app.forms import RegistrationForm, LoginForm
@@ -25,8 +25,9 @@ def login():
         password = 'mypassword'
         reg = NEWUSER.login(email, password)
         if reg == 1:
+            session['email'] = email
             flash("Welcome")
-            return redirect(url_for('catview'))
+            return redirect(url_for('view_category'))
         else:
             error = reg
             return render_template('login.html', form=form, error=error)
@@ -51,13 +52,12 @@ def register():
             return render_template('signup.html', form=form, error=error)
     return render_template('signup.html', form=form)
 
-@app.route('/mycategories', methods=['GET'])
-def catview():
-    # form = CatForm(request.form)
-    email = 'mwangi@mwangi.com'
-    mycats = NEWCAT.view_category(email)
-    # mycatsize = len(mycats)
-    if mycats:
-        return render_template('viewcats.html')
-    return render_template('index.html')
-    
+@app.route('/dashboard', methods=['GET'])
+def view_category():
+    email = session['email']
+    if email is not None:
+        mycats = NEWCAT.view_category(email)
+         # mycatsize = len(mycats)
+        if mycats:
+            return render_template('viewcats.html')
+    return render_template("dashboard.html")
