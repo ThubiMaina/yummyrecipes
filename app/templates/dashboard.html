@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block navbar %}
 <li class="nav-item">
-    <a class="nav-link" href="">Logout</a>
+    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
 </li>
 {% endblock %}
 {% block body %}
@@ -10,14 +10,16 @@
     <h5>My Categories</h5>
     <ul class="list-group">
         {% for listvalue in mycats %}
-            {% for catname, catid in listvalue %}
-                <label class="col-sm-offset-2 col-sm-8">
+            {% for key in listvalue %}
+                {% if key == 'catname' %}
+                    <label class="col-sm-offset-2 col-sm-8">
                     <li class="list-group-item">
                         <input type="checkbox" name="shoplist_ids" value="">
                         <a href="">{{ listvalue.catname }}</a>
                         <input type="hidden" name="" value="{{ catid }}">
                     </li>
-                </label>
+                    </label>
+                {% endif %}
             {% endfor %}
         {% endfor %}    
     </ul>
@@ -25,18 +27,18 @@
         <button type="submit" name="del" class="btn btn-success">delete</button>
     </div>
     {% endif %}
-     <p>You Have Not added any lists at the moment. Proceed to add lists</p>
+    <p>You Have Not added any lists at the moment. Proceed to add lists</p>
 </form>
 <div class="panel panel-info col-sm-offset-3 col-sm-6" style="float:left">	
     <h5>Add New Shopping List</h5>
-    <form action="" class="form-horizontal" method="post" name="shoplistadd">
+    <form action="{{ url_for('add_category') }}" class="form-horizontal" method="post">
         <div class="form-group" style="margin-top:10px;">
             <div class="col-sm-offset-2 col-sm-8">
-                <input type="text" class="form-control" value="" name="title" autocomplete="off" autofocus required/>
+                <input type="text" class="form-control" name="catname" autocomplete="off" required/>
             </div>
         </div>
         <div class="col-sm-offset-7 col-sm-10">
-            <button type="submit" name="add" class="btn btn-success">Add</button>
+            <button type="submit" name="add" class="btn btn-info">Add</button>
         </div>
     </form> 
 {% endblock %}
