@@ -46,3 +46,20 @@ class RegistrationForm(Form):
         validators.EqualTo('password', message='Passwords must match')
     ])
 
+
+class LoginForm(Form):
+    """Registration form with the following field properties:
+    Attributes:
+        email: A string representing the user's unique email address.
+        password: A string representing the user's password.
+    """
+    email = StringField('Email Address', [
+        validators.Length(min=6, max=50),
+        validators.InputRequired("email address cannot be blank."),
+        validators.Email("This field requires a valid email address")
+    ])
+    password = PasswordField('Password', [
+        validators.Length(min=6, max=25),
+        validators.InputRequired("Password cannot be blank."),
+    ])
+
