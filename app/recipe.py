@@ -45,4 +45,14 @@ class Recipe():
         """Delete the category from the global list"""
         RECIPE.pop(recipeid)
 
-    
+    def update_recipe(self, catid, recipeid, recipename, ingridients, process):
+        """Update the category with the new inputs"""
+        self.recipeid = recipeid
+        return RECIPE.insert(self.recipeid, {
+            'catid': catid,
+            'recipeid': recipeid,
+            'recipename': recipename,
+            'ingridients': ingridients,
+            'process': process
+        })
+
