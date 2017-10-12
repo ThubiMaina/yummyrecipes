@@ -16,24 +16,6 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm(request.form)
-    if request.method == 'POST':
-        # if form.validate_on_submit():
-        email = 'mwangi@mwangi.com'
-        password = 'mypassword'
-        reg = NEWUSER.login(email, password)
-        if reg == 1:
-            session['email'] = email
-            flash("Welcome")
-            return redirect(url_for('view_category'))
-        else:
-            error = reg
-            return render_template('login.html', form=form, error=error)
-    return render_template('login.html', form=form)
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
@@ -52,12 +34,32 @@ def register():
             return render_template('signup.html', form=form, error=error)
     return render_template('signup.html', form=form)
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm(request.form)
+    if request.method == 'POST':
+        # if form.validate_on_submit():
+        email = 'mwangi@mwangi.com'
+        password = 'mypassword'
+        reg = NEWUSER.login(email, password)
+        if reg == 1:
+            session['email'] = email
+            session['logged_in'] = 1
+            flash("Welcome back")
+            return redirect(url_for('view_category'))
+        else:
+            error = reg
+            return render_template('login.html', form=form, error=error)
+    return render_template('login.html', form=form)
+
+
 @app.route('/dashboard', methods=['GET'])
 def view_category():
-    email = session['email']
-    if email is not None:
+    if session.get('logged_in') == 1:
+        email = session['email']
         mycats = NEWCAT.view_category(email)
-         # mycatsize = len(mycats)
-        if mycats:
-            return render_template('viewcats.html')
-    return render_template("dashboard.html")
+        if mycats != 1:
+            return render_template('dashboard.html', mycats=mycats)
+        return render_template('dashboard.html')
+    return redirect(url_for('login'))
