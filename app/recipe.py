@@ -39,4 +39,10 @@ class Recipe():
                     myrecipes.append(listvalue)
                     return myrecipes
                 return 1
+
+    @staticmethod
+    def delete_recipe(recipeid):
+        """Delete the category from the global list"""
+        RECIPE.pop(recipeid)
+
     
