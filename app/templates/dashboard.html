@@ -16,7 +16,7 @@
                     <li class="list-group-item">
                         <input type="checkbox" name="shoplist_ids" value="">
                         <a href="">{{ listvalue.catname }}</a>
-                        <input type="hidden" name="" value="{{ catid }}">
+                        <input type="hidden" name="" value="{{ listvalue.catid }}">
                     </li>
                     </label>
                 {% endif %}
@@ -27,7 +27,6 @@
         <button type="submit" name="del" class="btn btn-success">delete</button>
     </div>
     {% endif %}
-    <p>You Have Not added any lists at the moment. Proceed to add lists</p>
 </form>
 <div class="panel panel-info col-sm-offset-3 col-sm-6" style="float:left">	
     <h5>Add New Shopping List</h5>
