@@ -7,7 +7,7 @@ class Category():
     """
     Category class that contains the methods to craete, View, Update, Delete categories
     """
-    def __init__(self, catname=None, email=None, catid=0):
+    def __init__(self, catname=None, email=None, catid=None):
         """
         Initialization of the category class
         """
@@ -26,10 +26,9 @@ class Category():
         mycats = []
         for listvalue in CATS:
             for key in listvalue:
-                if email == listvalue[key]:
+                if listvalue[key] == email:
                     mycats.append(listvalue)
                     return mycats
-                return 1
 
     @staticmethod
     def delete_category(catid):
