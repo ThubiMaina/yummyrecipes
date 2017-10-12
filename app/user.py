@@ -90,15 +90,15 @@ class User():
         """ Method to check if email is in the db"""
         emails = USERS.keys()
         if email in emails:
-            return True
+            return 1
         message = "Email not registered"
         return message
 
     def login(self, email, password):
         """ Method to check if passwords match"""
         dbdata = self.check_email_in_db(email)
-        if dbdata is True:
-            dbvalues = USERS[dbdata]
+        if dbdata == 1:
+            dbvalues = USERS[email]
             if password in dbvalues[1]:
                 return True
             message = "incorrect password"
