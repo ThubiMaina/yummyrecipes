@@ -66,10 +66,15 @@ def logout():
 def view_category():
     if session.get('logged_in') == 1:
         email = session['email']
-        mycats = NEWCAT.view_category(email)
+        '''mycats = NEWCAT.view_category(email)
         if mycats != 1:
             return render_template('dashboard.html', mycats=mycats)
-        return render_template('dashboard.html')
+        return render_template('dashboard.html')'''
+        mycats = [
+            {'catname': 'Albert', 'email': 2, 'catid': 10},
+            {'catname': 'Suzy', 'email': 2, 'catid': 17}
+        ]
+        return render_template('dashboard.html', mycats=mycats)
     return redirect(url_for('login'))
 
 
