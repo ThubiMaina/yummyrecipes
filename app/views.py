@@ -54,6 +54,14 @@ def login():
     return render_template('login.html', form=form)
 
 
+@app.route('/logout')
+def logout():
+    '''remove session stored values if any'''
+    session.pop('email', None)
+    session.pop('logged_in', 0)
+    return redirect(url_for('index'))
+
+
 @app.route('/dashboard', methods=['GET'])
 def view_category():
     if session.get('logged_in') == 1:
@@ -62,4 +70,16 @@ def view_category():
         if mycats != 1:
             return render_template('dashboard.html', mycats=mycats)
         return render_template('dashboard.html')
+    return redirect(url_for('login'))
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def add_category():
+    if session.get('logged_in') == 1:
+        if request.method == 'POST':
+            email = session['email']
+            catname = request.form['catname']
+            NEWCAT.create_category(catname, email)
+            return redirect(url_for('view_category'))
+        return redirect(url_for('view_category'))
     return redirect(url_for('login'))
