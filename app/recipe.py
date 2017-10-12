@@ -18,3 +18,15 @@ class Recipe():
         self.catid = catid
         self.recipeid = recipeid
         self.myrecipes = []
+
+    def create_recipe(self, catid, recipeid, recipename, ingridients, process):
+        """ Method for creating a recipes for a particular category"""
+        size = len(RECIPE)
+        self.recipeid = size
+        return RECIPE.insert(self.recipeid, {
+            'catid': catid,
+            'recipeid': recipeid,
+            'recipename': recipename,
+            'ingridients': ingridients,
+            'process': process
+        })
