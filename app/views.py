@@ -3,8 +3,10 @@ from flask import render_template, url_for, redirect, request, flash
 from app import app
 from app.forms import RegistrationForm, LoginForm
 from app.user import User
+from app.category import Category
 
 NEWUSER = User()
+NEWCAT = Category()
 
 app.secret_key = 'This is my secret_key'
 
@@ -23,8 +25,8 @@ def login():
         password = 'mypassword'
         reg = NEWUSER.login(email, password)
         if reg == 1:
-            flash('Welcome')
-            return redirect(url_for('index'))
+            flash("Welcome")
+            return redirect(url_for('catview'))
         else:
             error = reg
             return render_template('login.html', form=form, error=error)
@@ -48,3 +50,14 @@ def register():
             error = reg
             return render_template('signup.html', form=form, error=error)
     return render_template('signup.html', form=form)
+
+@app.route('/mycategories', methods=['GET'])
+def catview():
+    # form = CatForm(request.form)
+    email = 'mwangi@mwangi.com'
+    mycats = NEWCAT.view_category(email)
+    # mycatsize = len(mycats)
+    if mycats:
+        return render_template('viewcats.html')
+    return render_template('index.html')
+    
