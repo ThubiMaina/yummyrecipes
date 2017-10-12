@@ -5,18 +5,27 @@
 </li>
 {% endblock %}
 {% block body %}
-<h4>My Shopping Lists</h4>
 <form action="" class="col-sm-6 form-horizontal" method="post" name="categories" style="float:left">
+    {% if mycats %}   
+    <h5>My Categories</h5>
     <ul class="list-group">
-        <label class="col-sm-offset-2 col-sm-8">
-            <li class="list-group-item">
-                <input type="checkbox" name="shoplist_ids" value="">
-                <a href="">Kimani</a></li>
-        </label>
+        {% for listvalue in mycats %}
+            {% for catname, catid in listvalue %}
+                <label class="col-sm-offset-2 col-sm-8">
+                    <li class="list-group-item">
+                        <input type="checkbox" name="shoplist_ids" value="">
+                        <a href="">{{ listvalue.catname }}</a>
+                        <input type="hidden" name="" value="{{ catid }}">
+                    </li>
+                </label>
+            {% endfor %}
+        {% endfor %}    
     </ul>
     <div class="col-sm-offset-7 col-sm-10">
         <button type="submit" name="del" class="btn btn-success">delete</button>
     </div>
+    {% endif %}
+     <p>You Have Not added any lists at the moment. Proceed to add lists</p>
 </form>
 <div class="panel panel-info col-sm-offset-3 col-sm-6" style="float:left">	
     <h5>Add New Shopping List</h5>
