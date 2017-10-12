@@ -17,7 +17,6 @@ class Recipe():
         self.process = process
         self.catid = catid
         self.recipeid = recipeid
-        self.myrecipes = []
 
     def create_recipe(self, catid, recipeid, recipename, ingridients, process):
         """ Method for creating a recipes for a particular category"""
@@ -30,3 +29,14 @@ class Recipe():
             'ingridients': ingridients,
             'process': process
         })
+
+    def view_recipe(self, recipeid):
+        """View method to view the recipes"""
+        myrecipes = []
+        for listvalue in RECIPE:
+            for key in listvalue:
+                if recipeid == listvalue[key]:
+                    myrecipes.append(listvalue)
+                    return myrecipes
+                return 1
+    
