@@ -20,3 +20,18 @@ class Category():
         size = len(CATS)
         CATS.insert(size, {'catname': catname, 'email': email, 'catid': size})
 
+    def view(self, email):
+        mycats = []
+        for d in CATS:
+            for key in d:
+                if email == d[key]:
+                    mycats.append(d)
+                    return mycats
+                    for d in mycats
+                      
+                return 1
+                
+
+
+
+
