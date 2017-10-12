@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+   <body>
+    {% if mycats %}
+    <p>there is something in here</p>
+      <table border = 1>   
+        {% for d in mycats %}
+            {% for key in d %}
+                {% print(d[key]) %}
+            {% endfor %}
+        {% endfor %}    
+      </table>
+    {% endif %} 
+   </body>
+</html>
