@@ -11,16 +11,6 @@ NEWCAT = Category()
 app.secret_key = 'This is my secret_key'
 
 
-@app.route('/check')
-def test():
-    email = "muthoni"
-    ctname = 'kamau'
-    cat2 = 'otieno'
-    NEWCAT.create_category(ctname, email)
-    NEWCAT.create_category(cat2, email)
-    mycats = NEWCAT.view_category(email)
-    return render_template("checkcat.html", mycats=mycats)
-
 @app.route('/')
 def index():
     return render_template("index.html")
