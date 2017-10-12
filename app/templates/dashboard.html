@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block navbar %}
+<li class="nav-item">
+    <a class="nav-link" href="">Logout</a>
+</li>
+{% endblock %}
+{% block body %}
+<h4>My Shopping Lists</h4>
+<form action="" class="col-sm-6 form-horizontal" method="post" name="categories" style="float:left">
+    <ul class="list-group">
+        <label class="col-sm-offset-2 col-sm-8">
+            <li class="list-group-item">
+                <input type="checkbox" name="shoplist_ids" value="">
+                <a href="">Kimani</a></li>
+        </label>
+    </ul>
+    <div class="col-sm-offset-7 col-sm-10">
+        <button type="submit" name="del" class="btn btn-success">delete</button>
+    </div>
+</form>
+<div class="panel panel-info col-sm-offset-3 col-sm-6" style="float:left">	
+    <h5>Add New Shopping List</h5>
+    <form action="" class="form-horizontal" method="post" name="shoplistadd">
+        <div class="form-group" style="margin-top:10px;">
+            <div class="col-sm-offset-2 col-sm-8">
+                <input type="text" class="form-control" value="" name="title" autocomplete="off" autofocus required/>
+            </div>
+        </div>
+        <div class="col-sm-offset-7 col-sm-10">
+            <button type="submit" name="add" class="btn btn-success">Add</button>
+        </div>
+    </form> 
+{% endblock %}
