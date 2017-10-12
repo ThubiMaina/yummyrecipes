@@ -14,24 +14,29 @@ class Category():
         self.catname = catname
         self.email = email
         self.catid = catid
+        self.mycats = []
 
-    def create(self, catname, email):
+    def create_category(self, catname, email):
         """ Method for creating a categoris"""
         size = len(CATS)
-        CATS.insert(size, {'catname': catname, 'email': email, 'catid': size})
+        self.catid = size
+        return CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': size})
 
-    def view(self, email):
-        mycats = []
-        for d in CATS:
-            for key in d:
-                if email == d[key]:
-                    mycats.append(d)
-                    return mycats
-                    for d in mycats
-                      
+    def view_category(self, email):
+        """View method to view the categories"""
+        for listvalue in CATS:
+            for key in listvalue:
+                if email == listvalue[key]:
+                    self.mycats.append(listvalue)
+                    return self.mycats
                 return 1
-                
 
+    @staticmethod
+    def delete_category(catid):
+        """Delete the category from the global list"""
+        CATS.pop(catid)
 
-
-
+    def update_category(self, catname, email, catid):
+        """Update the category with the new inputs"""
+        self.catid = catid
+        CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': self.catid})
