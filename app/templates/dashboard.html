@@ -15,7 +15,7 @@
                     <label class="col-sm-offset-2 col-sm-8">
                     <li class="list-group-item">
                         <input type="checkbox" name="catids" value="{{ listvalue.catid }}">
-                        <a href="{{ url_for('update_category', catid = listvalue.catid, catname = listvalue.catname)}}">
+                        <a href="{{ url_for('update_category_get', catid = listvalue.catid)}}">
                             {{ listvalue.catname }}</a>
                         <a href="">{{ listvalue.catid }}</a>
                         <!--<input type="hidden" name="catid" value="{{ listvalue.catid }}">-->
@@ -41,5 +41,5 @@
         <div class="col-sm-offset-7 col-sm-10">
             <button type="submit" name="add" class="btn btn-info">Add</button>
         </div>
-    </form> 
+    </form>
 {% endblock %}
