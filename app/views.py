@@ -90,7 +90,7 @@ def add_category():
     return redirect(url_for('login'))
 
 
-@app.route('/dashboard', methods=['POST'])
+@app.route('/dashboard/del', methods=['POST'])
 def del_category():
     """ Delete Selected categories by the user"""
     catids = request.form.getlist('catids')
