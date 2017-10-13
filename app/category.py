@@ -5,7 +5,8 @@ CATS = []
 
 class Category():
     """
-    Category class that contains the methods to craete, View, Update, Delete categories
+    Category class that contains the methods to craete, View, Update, 
+    Delete categories
     """
     def __init__(self):
         """
@@ -37,9 +38,12 @@ class Category():
     @staticmethod
     def delete_category(catid):
         """Delete the category from the global list"""
-        CATS.pop(catid)
+        del CATS[catid]
+        CATS.insert(catid,  {'catname': 'deleted', 'email': 'del@del.com', 'catid': catid})
+        return CATS
 
     def update_category(self, catname, email, catid):
         """Update the category with the new inputs"""
         self.catid = catid
-        return CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': self.catid})
+        CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': self.catid})
+        return CATS
