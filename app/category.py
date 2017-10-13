@@ -42,18 +42,18 @@ class Category():
         CATS.insert(catid, {'catname': 'deleted', 'email': 'del@del.com', 'catid': catid})
         return CATS
 
-    def update_category(self, catname, email, catid):
-        """Update the category with the new inputs"""
-        self.catid = catid
-        CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': self.catid})
-        return CATS
-
     def get_category_name(self, catid):
         mycat = CATS[catid]
         for key in mycat:
             if key == 'catname':
-                catname = mycat[key]   
+                catname = mycat[key] 
                 return catname
-    
-    
 
+    def update_category(self, catname, email, catid):
+        """Update the category with the new inputs"""
+        self.catname = catname
+        self.email = email
+        self.catid = catid
+        del CATS[self.catid]
+        CATS.insert(self.catid, {'catname': self.catname, 'email': self.email, 'catid': self.catid})
+        return CATS
