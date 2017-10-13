@@ -8,17 +8,17 @@
 </li>
 {% endblock %}
 {% block body %}
-<div class="panel panel-info col-sm-offset-3 col-sm-6" style="float:left">	
-    <h5>Add New Shopping List</h5>
-    <form action="{{ url_for('update_category') }}" class="form-horizontal" method="post">
+<div class="panel panel-info col-sm-offset-3 col-sm-6">	
+    <h5>Update Category</h5>
+    <form action="{{ url_for('add_category') }}" class="form-horizontal" method="post">
         <div class="form-group" style="margin-top:10px;">
             <div class="col-sm-offset-2 col-sm-8">
-                <input type="text" class="form-control" name="catname" autocomplete="off" required/>
+                <input type="text" class="form-control" name="catname" placeholder="{{ catname }}"autocomplete="off" required/>
+                <input type="hidden" class="form-control" name="catid" value="{{ catid }}"/>
             </div>
         </div>
         <div class="col-sm-offset-7 col-sm-10">
-            <button type="submit" name="add" class="btn btn-info">Add</button>
+            <button type="submit" name="Update" class="btn btn-info">Update</button>
         </div>
     </form>
-</div>     
 {% endblock %}
