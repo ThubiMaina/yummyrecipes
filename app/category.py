@@ -47,3 +47,8 @@ class Category():
         self.catid = catid
         CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': self.catid})
         return CATS
+
+    def get_category(self, catid):
+        self.catid = int(catid)
+        return CATS[self.catid]
+
