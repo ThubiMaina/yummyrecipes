@@ -39,7 +39,7 @@ class Category():
     def delete_category(catid):
         """Delete the category from the global list"""
         del CATS[catid]
-        CATS.insert(catid,  {'catname': 'deleted', 'email': 'del@del.com', 'catid': catid})
+        CATS.insert(catid, {'catname': 'deleted', 'email': 'del@del.com', 'catid': catid})
         return CATS
 
     def update_category(self, catname, email, catid):
@@ -48,7 +48,12 @@ class Category():
         CATS.insert(self.catid, {'catname': catname, 'email': email, 'catid': self.catid})
         return CATS
 
-    def get_category(self, catid):
-        self.catid = int(catid)
-        return CATS[self.catid]
+    def get_category_name(self, catid):
+        mycat = CATS[catid]
+        for key in mycat:
+            if key == 'catname':
+                catname = mycat[key]   
+                return catname
+    
+    
 
