@@ -98,8 +98,18 @@ def del_category():
         NEWCAT.delete_category(int(catid))
     return redirect(url_for('view_category'))
 
-@app.route('/dashboard/update/<int:catid>', methods=['GET', 'POST'])
-def update_category(catid):
+@app.route('/dashboard/update/', methods=['POST'])
+def update_category():
     """ Update Selected category by the user"""
+    categoryname = request.form['catname']
+    categoryid = int(request.form['catid'])
+    email = session['email']
+    NEWCAT.update_category(categoryname, email, categoryid)
+    flash("Your Category has been udated")
+    return redirect(url_for('view_category'))
+
+@app.route('/dashboard/update/<int:catid>', methods=['GET'])
+def update_category_get(catid):
+    """ Link to Update Selected category by the user"""
     catname = NEWCAT.get_category_name(int(catid))
     return render_template('updatecat.html', catid=catid, catname=catname)
