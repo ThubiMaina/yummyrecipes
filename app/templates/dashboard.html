@@ -5,7 +5,7 @@
 </li>
 {% endblock %}
 {% block body %}
-<form action="{{ url_for('del_category') }}" class="col-sm-6 form-horizontal" method="post" name="categories" style="float:left">
+<form action="{{ url_for('del_category') }}" class="col-sm-6 form-horizontal" method="post" style="float:left">
     {% if mycats %}   
     <h5>My Categories</h5>
     <ul class="list-group">
@@ -14,11 +14,9 @@
                 {% if key == 'catname' %}
                     <label class="col-sm-offset-2 col-sm-8">
                     <li class="list-group-item">
-                        <input type="checkbox" name="catids" value="{{ listvalue.catid }}">
-                        <a href="{{ url_for('update_category_get', catid = listvalue.catid)}}">
-                            {{ listvalue.catname }}</a>
-                        <a href="">{{ listvalue.catid }}</a>
-                        <!--<input type="hidden" name="catid" value="{{ listvalue.catid }}">-->
+                      <input type="checkbox" name="catids" value="{{ listvalue.catid }}"/>
+                      <a href="">{{ listvalue.catname }}</a>
+                      <a href="{{ url_for('update_category_get', catid = listvalue.catid)}}">Update</a>    
                     </li>
                     </label>
                 {% endif %}
