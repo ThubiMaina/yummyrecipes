@@ -90,10 +90,15 @@ def add_category():
     return redirect(url_for('login'))
 
 
-@app.route('/dashboarddel', methods=['POST'])
+@app.route('/dashboard', methods=['POST'])
 def del_category():
     """ Delete Selected categories by the user"""
     catids = request.form.getlist('catids')
     for catid in catids:
         NEWCAT.delete_category(int(catid))
     return redirect(url_for('view_category'))
+
+@app.route('/dashboard/update/<int:catid>', methods=['GET', 'POST'])
+def update_category(catid, catname):
+    """ Update Selected category by the user"""
+    return render_template('index.html')
