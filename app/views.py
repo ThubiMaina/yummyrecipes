@@ -99,6 +99,7 @@ def del_category():
     return redirect(url_for('view_category'))
 
 @app.route('/dashboard/update/<int:catid>', methods=['GET', 'POST'])
-def update_category(catid, catname):
+def update_category(catid):
     """ Update Selected category by the user"""
-    return render_template('index.html')
+    catname = NEWCAT.get_category_name(int(catid))
+    return render_template('updatecat.html', catid=catid, catname=catname)
