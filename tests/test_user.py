@@ -21,12 +21,11 @@ class TestUser(unittest.TestCase):
     
     def test_user_exists(self):
         """ method to test if user exists in the database"""
-        self.user.create(self.email, self.username, self.password, self.cpassword)
         result = self.user.check_email_in_db(self.email)
         self.assertEqual(1, result, "User exists")
 
     def test_email_is_not_blank(self):
-        """ method to test if email field has been left blank"""
+        """ method to test if email field is empty"""
         new_user = self.user.create('', self.username, self.password, self.cpassword)
         self.assertEqual("Email should not be blank", new_user)
 
@@ -62,14 +61,14 @@ class TestUser(unittest.TestCase):
         self.assertEqual("Email already used for registration", second_user)
 
     def test_username_is_not_blank(self):
-        """ method to test if username field has been left blank"""
+        """ method to test if username field is empty"""
         new_user = self.user.create('steve@gmail.com', '', self.password, self.cpassword)
         self.assertEqual("Username should not be blank", new_user)
     
     def test_username_has_spaces(self):
         """ method to test if username contains trailing spaces"""
-        trailling_usernames = [' muthama', 'muthama ', 'muth ama']
-        for username in trailling_usernames:
+        invalid_usernames = [' muthama', 'muthama ', 'muth ama', '       ']
+        for username in invalid_usernames:
             new_user = self.user.create('steve@gmail.com', username, self.password, self.cpassword)
             self.assertEqual("Username cannot have blank space or tabs", new_user)
 
@@ -79,10 +78,46 @@ class TestUser(unittest.TestCase):
         invalid_emails = [long_name, 'short']
         for username in invalid_emails:
             new_user = self.user.create('steve@gmail.com', username, self.password, self.cpassword)
-            self.assertEqual("Username should contain min 6 and max 50 characters", new_user)
+            self.assertEqual("Username should contain min 6 and max 25 characters", new_user)
 
     def test_password_is_not_blank(self):
-        """ method to test if password field has been left blank"""
+        """ method to test if password field is empty"""
         new_user = self.user.create('steve@gmail.com', self.password, '', self.cpassword)
         self.assertEqual("Password should not be blank", new_user)
+
+    def test_password_has_spaces(self):
+        """ method to test if password contains trailing spaces"""
+        invalid_password = [' password', 'password ', 'pass word', '         ']
+        for username in invalid_password:
+            new_user = self.user.create('steve@gmail.com', username, self.password, self.cpassword)
+            self.assertEqual("Username cannot have blank space or tabs", new_user)
+
+    def test_password_is_valid_length(self):
+        """ method to test if password is valid length"""
+        long_pass = ''.join(random.choice(string.ascii_lowercase) for _ in range(26))
+        invalid_emails = [long_pass, 'passord']
+        for password in invalid_emails:
+            new_user = self.user.create('steve@gmail.com', self.username, password, self.cpassword)
+            self.assertEqual("Password should contain min 9 and max 25 characters", new_user)
+
+    def test_password_is_confirmed(self):
+        """ Method to test if password is confirmed correctly"""
+        new_user = self.user.create('steve@gmail.com', self.username, self.password, 'past')
+        self.assertEqual("confirm password coreectly", new_user)
+
+    def test_if_user_can_login_with_invalid_email(self):
+        """ Method to test if user can login if email not registered"""
+        login = self.user.login('steve@gmail.com', self.password)
+        self.assertEqual("Email not registered", login)
+
+    def test_if_user_can_login_with_invalid_password(self):
+        """ Method to test if user can login with wrong password"""
+        login = self.user.login(self.email, 'mypassword')
+        self.assertEqual("incorrect password", login)
+
+    def test_user_can_login_successfully(self):
+        """ Method to test if user can login with wrong password"""
+        login = self.user.login(self.email, self.email)
+        self.assertTrue(login)
+
     
