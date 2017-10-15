@@ -1,4 +1,4 @@
-""" create user accounts and enable user to login"""
+""" Create user accounts and enable user to login"""
 import re
 
 USERS = {}
@@ -8,15 +8,49 @@ class User():
     """
     User class that contains the methods to craete a user and login the user
     """
-    def __init__(self, username=None, email=None, password=None):
-        """
-        Initialization of the user class
-        """
-        self.username = username
-        self.email = email
-        self.password = password
+    def __init__(self):
+        """ Initialization of the user class """
+        self.username = None
+        self.email = None
+        self.password = None
 
-    def check_email(self, email):
+    def create(self, email, username, password, cpassword):
+        """ Method for creating a user"""
+        check_email = self.check_email(email)
+        if check_email == 1:
+            check_username = self.check_username(username)
+            if check_username == 1:
+                check_password = self.check_password(password, cpassword)
+                if check_password == 1:
+                    self.email = email
+                    self.username = username
+                    self.password = password
+                    USERS[self.email] = [self.username, self.password]
+                    result = self.email in USERS.keys()
+                    if result is True:
+                        return 1
+                    message = "Failed to create user"
+                    return message
+                return check_password
+            return check_username
+        return check_email
+
+    def login(self, email, password):
+        """ Method to check if passwords match"""
+        dbdata = self.check_email_in_db(email)
+        if dbdata == 1:
+            self.email = email
+            self.password = password
+            dbvalues = USERS[self.email]
+            if self.password in dbvalues[1]:
+                return True
+            message = "incorrect password"
+            return message
+        return dbdata
+
+    @staticmethod
+    def check_email(email):
+        """ Method to check if email entered is valid """
         if email != '':
             newmail = email.strip()
             if len(newmail) == len(email):
@@ -37,7 +71,9 @@ class User():
         message = "Email should not be blank"
         return message
 
-    def check_username(self, username):
+    @staticmethod
+    def check_username(username):
+        """ Method to check if username entered is valid """
         if username != '':
             stripname = username.strip()
             newname = re.sub(r'\s+', '', stripname)
@@ -52,7 +88,9 @@ class User():
         message = "Username should not be blank"
         return message
 
-    def check_password(self, password, cpassword):
+    @staticmethod
+    def check_password(password, cpassword):
+        """ Method to check if password entered is valid """
         if password != '':
             strippass = password.strip()
             newpass = re.sub(r'\s+', '', strippass)
@@ -70,39 +108,11 @@ class User():
         message = "Password should not be blank"
         return message
 
-    def create(self, email, username, password, cpassword):
-        """ Method for creating a user"""
-        check_email = self.check_email(email)
-        if check_email == 1:
-            check_username = self.check_username(username)
-            if check_username == 1:
-                check_password = self.check_password(password, cpassword)
-                if check_password == 1:
-                    USERS[email] = [username, password]
-                    result = email in USERS.keys()
-                    if result is True:
-                        return 1
-                    message = "Failed to create user"
-                    return message
-                return check_password
-            return check_username
-        return check_email
-                
-    def check_email_in_db(self, email):
+    @staticmethod
+    def check_email_in_db(email):
         """ Method to check if email is in the db"""
         emails = USERS.keys()
         if email in emails:
             return 1
         message = "Email not registered"
         return message
-
-    def login(self, email, password):
-        """ Method to check if passwords match"""
-        dbdata = self.check_email_in_db(email)
-        if dbdata == 1:
-            dbvalues = USERS[email]
-            if password in dbvalues[1]:
-                return True
-            message = "incorrect password"
-            return message
-        return dbdata
