@@ -47,6 +47,24 @@ class Category():
         message = "Create your first category here >>>"
         return message
 
+    def delete_category(self, catid, email):
+        """Delete the category from the global list"""
+        self.catid = int(catid)
+        category_to_delete = CATS[self.catid]
+        self.catname = category_to_delete['catname']
+        self.email = category_to_delete['email']
+        if self.email == email:
+            CATS.insert(self.catid, {'catname': self.catname,
+                                 'email': 'del' + self.email,
+                                 'catid': self.catid})
+            new_category = CATS[self.catid]
+            new_mail = new_category['email']
+            if new_mail != self.email:
+                self.email = new_mail
+                return 1
+            message = 'failed to delete'
+            return message
+        if
 
     @staticmethod
     def check_category_name(category_name):
