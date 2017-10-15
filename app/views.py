@@ -7,7 +7,6 @@ from app.category import Category
 
 NEWUSER = User()
 NEWCAT = Category()
-
 app.secret_key = 'This is my secret_key'
 
 
@@ -18,20 +17,27 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """A view class to handle user registration"""
     form = RegistrationForm(request.form)
     if request.method == 'POST':
-        # if form.validate_on_submit():
-        email = 'mwangi@mwangi.com'
-        username = 'muthama'
-        password = 'mypassword'
-        cpassword = 'mypassword'
-        reg = NEWUSER.create(email, username, password, cpassword)
-        if reg == 1:
-            flash('Registration Successfull')
-            return redirect(url_for('login'))
-        else:
+        # get required data
+        form = RegistrationForm(request.form)
+        if form.validate():
+            username = form.username.data
+            email = form.email.data
+            password = form.password.data
+            cpassword = form.confirm.data
+            reg = NEWUSER.create(email, username, password, cpassword)
+
+            if reg == 1:
+                flash('Registration Successfull')
+                return redirect(url_for('login'))
+
             error = reg
             return render_template('signup.html', form=form, error=error)
+
+        flash('Please correct the errors below')
+        return render_template('signup.html', form=form)
     return render_template('signup.html', form=form)
 
 
