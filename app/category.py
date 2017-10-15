@@ -55,8 +55,8 @@ class Category():
         self.email = category_to_delete['email']
         if self.email == email:
             CATS.insert(self.catid, {'catname': self.catname,
-                                 'email': 'del' + self.email,
-                                 'catid': self.catid})
+                                     'email': 'del' + self.email,
+                                     'catid': self.catid})
             new_category = CATS[self.catid]
             new_mail = new_category['email']
             if new_mail != self.email:
@@ -64,7 +64,8 @@ class Category():
                 return 1
             message = 'failed to delete'
             return message
-        if
+        message = "The action is Forbideen"
+        return message
 
     @staticmethod
     def check_category_name(category_name):
