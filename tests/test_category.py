@@ -23,7 +23,7 @@ class TestCategory(unittest.TestCase):
         new_category = self.category.create_category('', self.email)
         self.assertEqual("Category name cannot be blank.", new_category)
 
-    def test_category_name_is_valid_length(self):
+    def test_category_name_length(self):
         """ method to test if category  name is valid length"""
         long_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(31))
         invalid_names = [long_name, 'short']
@@ -31,25 +31,41 @@ class TestCategory(unittest.TestCase):
             new_category = self.category.create_category(catname, self.email)
             self.assertEqual("Field must be between 6 and 30 characters long.", new_category)
 
-    def test_user_can_view_his_categories(self):
+    def test_view_categories(self):
         """ method to test if user can successfully see his categories"""
         view_category = self.category.view_category(self.email)
         self.assertEqual(1, view_category)
 
-    def test_returns_empty_if_user_lacks_categories(self):
+    def test_view_empty_categories(self):
         """ method to test if user can view another users category"""
         self.email = 'stephen@gmail.com'
         view_category = self.category.view_category(self.email)
         self.assertEqual("Create your first category here >>>", view_category)
 
-    def test_category_is_successfully_deleted(self):
+    def test_delete_categories(self):
         """ method to test if user can delete their categories"""
-        self.category.create_category(self.catname, self.email)
         category_to_delete = self.category.delete_category(0, self.email)
         self.assertEqual(1, category_to_delete)
 
-    def test_user_can_delete_another_user_category(self):
+    def test_delete_foreign_category(self):
         """ method to test if user can delete another users category"""
-        self.category.create_category(self.catname, 'steve@gmail.com')
         category_to_delete = self.category.delete_category(0, self.email)
-        self.assertEqual("The action is Forbideen", category_to_delete)
+        self.assertEqual("The action is Forbiden", category_to_delete)
+
+    def test_update_category(self):
+        """ method to test if user can update their category successfully"""
+        new_catname = "update category"
+        category_update = self.category.update_category(new_catname, self.email, 0)
+        self.assertEqual(1, category_update)
+
+    def test_update_same_name_category(self):
+        """ method to test if user can update their category with the same name"""
+        category_update = self.category.update_category('update category', self.email, 0)
+        self.assertEqual("The name is still the same", category_update)
+
+    def test_update_foreign_category(self):
+        """ method to test if user can update a foreign category"""
+        category_update = self.category.update_category('foreign category', 'steve@gmail.com', 0)
+        self.assertEqual("Forbiden! Action Not allowed", category_update)
+
+
