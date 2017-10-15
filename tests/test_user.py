@@ -23,15 +23,18 @@ class TestUser(unittest.TestCase):
         result = self.user.check_email_in_db(self.email)
         self.assertEqual(1, result, "User exists")
 
-    def test_email_is_blank(self):
+    def test_email_is_not_blank(self):
         """ method to test if email field has been left blank"""
         new_user = self.user.create('', self.username, self.password, self.cpassword)
         self.assertEqual("Email should not be blank", new_user)
 
-    def test_email_contains_trailing_spaces(self):
+    def test_email_has_trailing_spaces(self):
         """ method to test if email contains trailing spaces"""
-        new_user = self.user.create(' muthamass@gmail.com ', self.username, self.password, self.cpassword)
-        self.assertEqual("Email cannot have blank space or tabs", new_user)
+        trailling_emails = [' muthamass@gmail.com', 'muthamass@gmail.com ',
+                            '  muthamass@gmail.com', ' muthamass@gmail.com ']
+        for email in trailling_emails:
+            new_user = self.user.create(email, self.username, self.password, self.cpassword)
+            self.assertEqual("Email cannot have blank space or tabs", new_user)
 
     def test_email_is_valid_format(self):
         """ method to test if email address is valid"""
@@ -42,3 +45,21 @@ class TestUser(unittest.TestCase):
         for email in invalid_emails:
             new_user = self.user.create(email, self.username, self.password, self.cpassword)
             self.assertEqual("Enter a valid email address", new_user)
+
+    def test_email_has_been_registered(self):
+        """ method to test if email has already been registered"""
+        second_user = self.user.create(self.email, self.username, self.password, self.cpassword)
+        self.assertEqual("Email already used for registration", second_user)
+
+    def test_username_is_not_blank(self):
+        """ method to test if username field has been left blank"""
+        new_user = self.user.create('steve@gmail.com', '', self.password, self.cpassword)
+        self.assertEqual("Username should not be blank", new_user)
+    
+    def test_username_has_trailing_spaces(self):
+        """ method to test if username contains trailing spaces"""
+        trailling_usernames = [' muthama', 'muthama ', 'muth ama']
+        for username in trailling_usernames:
+            new_user = self.user.create('steve@gmail.com', username, self.password, self.cpassword)
+            self.assertEqual("Username cannot have blank space or tabs", new_user)
+    
