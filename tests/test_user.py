@@ -1,5 +1,6 @@
 """Test User case """
-
+import string
+import random
 import unittest
 from app.user import User
 
@@ -20,6 +21,7 @@ class TestUser(unittest.TestCase):
     
     def test_user_exists(self):
         """ method to test if user exists in the database"""
+        self.user.create(self.email, self.username, self.password, self.cpassword)
         result = self.user.check_email_in_db(self.email)
         self.assertEqual(1, result, "User exists")
 
@@ -46,6 +48,14 @@ class TestUser(unittest.TestCase):
             new_user = self.user.create(email, self.username, self.password, self.cpassword)
             self.assertEqual("Enter a valid email address", new_user)
 
+    def test_email_is_valid_length(self):
+        """ method to test if email address is valid length"""
+        long_email = ''.join(random.choice(string.ascii_lowercase) for _ in range(101))
+        invalid_emails = [long_email, 'ss@ss.com']
+        for email in invalid_emails:
+            new_user = self.user.create(email, self.username, self.password, self.cpassword)
+            self.assertEqual("Email Address should contain max 100 characters", new_user)
+
     def test_email_has_been_registered(self):
         """ method to test if email has already been registered"""
         second_user = self.user.create(self.email, self.username, self.password, self.cpassword)
@@ -56,10 +66,23 @@ class TestUser(unittest.TestCase):
         new_user = self.user.create('steve@gmail.com', '', self.password, self.cpassword)
         self.assertEqual("Username should not be blank", new_user)
     
-    def test_username_has_trailing_spaces(self):
+    def test_username_has_spaces(self):
         """ method to test if username contains trailing spaces"""
         trailling_usernames = [' muthama', 'muthama ', 'muth ama']
         for username in trailling_usernames:
             new_user = self.user.create('steve@gmail.com', username, self.password, self.cpassword)
             self.assertEqual("Username cannot have blank space or tabs", new_user)
+
+    def test_username_is_valid_length(self):
+        """ method to test if username is valid length"""
+        long_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(26))
+        invalid_emails = [long_name, 'short']
+        for username in invalid_emails:
+            new_user = self.user.create('steve@gmail.com', username, self.password, self.cpassword)
+            self.assertEqual("Username should contain min 6 and max 50 characters", new_user)
+
+    def test_password_is_not_blank(self):
+        """ method to test if password field has been left blank"""
+        new_user = self.user.create('steve@gmail.com', self.password, '', self.cpassword)
+        self.assertEqual("Password should not be blank", new_user)
     
