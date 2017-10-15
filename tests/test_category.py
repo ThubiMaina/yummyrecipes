@@ -1,4 +1,6 @@
 """Test Category case """
+import string
+import random
 import unittest
 from app.category import Category
 
@@ -12,13 +14,13 @@ class TestCategory(unittest.TestCase):
         self.catid = None
 
     def test_create_category(self):
-        """ method to test for success in creating user account"""
+        """ method to test for success in creating category name"""
         new_category = self.category.create_category(self.catname, self.email)
         self.assertEqual(1, new_category, "Category Not Created")
 
     def test_category_name_is_not_blank(self):
-        """ method to test if username field is empty"""
-        new_category = self.category.create_category(self.catname, self.email)
+        """ method to test if category name field is empty"""
+        new_category = self.category.create_category('', self.email)
         self.assertEqual("Category name cannot be blank.", new_category)
 
     def test_category_name_is_valid_length(self):
