@@ -11,15 +11,14 @@ class Category():
     Delete categories
     """
     def __init__(self):
-        """
-        Initialization of the category class
-        """
+        """ Initialization of the category class """
+        self.user_categories = []
         self.catname = None
         self.email = None
         self.catid = None
 
     def create_category(self, catname, email):
-        """ Method for creating a categoris"""
+        """ Method for creating a categories"""
         self.catname = self.check_category_name(catname)
         if self.catname == 1:
             size = len(CATS)
@@ -33,6 +32,21 @@ class Category():
             message = "Failed to create category"
             return message
         return self.catname
+
+    def view_category(self, email):
+        """Method to view the categories using the session email address"""
+        self.email = email
+        user_categories = []
+        for listvalue in CATS:
+            for key in listvalue:
+                if listvalue[key] == self.email:
+                    user_categories.append(listvalue)
+        self.user_categories = user_categories
+        if len(self.user_categories) >= 1:
+            return 1
+        message = "Create your first category here >>>"
+        return message
+
 
     @staticmethod
     def check_category_name(category_name):
