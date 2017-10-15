@@ -21,51 +21,53 @@ class User():
             newmail = email.strip()
             if len(newmail) == len(email):
                 emaillength = len(email)
-                if emaillength >= 6 and emaillength <= 50:
+                if emaillength >= 10 and emaillength <= 100:
                     regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+$)"
                     if re.search(regex, email):
                         if email not in USERS.keys():
-                            return 1  
-                        message = "Email already in use"
+                            return 1
+                        message = "Email already used for registration"
                         return message
-                    message = "Enter a valid email"
+                    message = "Enter a valid email address"
                     return message
-                message = "email length too big"
+                message = "Email Address should contain max 100 characters"
                 return message
-            message = "Remove Trailing whitespaces from email"
+            message = "Email cannot have blank space or tabs"
             return message
         message = "Email should not be blank"
         return message
 
-    def check_password(self, password, cpassword):
-        if password != '':
-            newpass = password.strip()
-            if len(newpass) == len(password):
-                passlength = len(password)
-                if passlength >= 6 and passlength <= 25:
-                    if password == cpassword:
-                        return 1
-                    message = "confirm password coreectly"
-                    return message
-                message = "min 6 and max 25 characters"
-                return message
-            message = "Remove Trailing whitespaces from password"
-            return message
-        message = "Password should not be blank"
-        return message
-
     def check_username(self, username):
         if username != '':
-            newname = username.strip()
+            stripname = username.strip()
+            newname = re.sub(r'\s+', '', stripname)
             if len(newname) == len(username):
                 namelength = len(username)
                 if namelength >= 6 and namelength <= 25:
                     return 1
-                message = "min 6 and max 25 characters"
+                message = "Username should contain min 6 and max 25 characters"
                 return message
-            message = "Remove Trailing whitespaces from username"
+            message = "Username cannot have blank space or tabs"
             return message
         message = "Username should not be blank"
+        return message
+
+    def check_password(self, password, cpassword):
+        if password != '':
+            strippass = password.strip()
+            newpass = re.sub(r'\s+', '', strippass)
+            if len(newpass) == len(password):
+                passlength = len(password)
+                if passlength >= 8 and passlength <= 25:
+                    if password == cpassword:
+                        return 1
+                    message = "confirm password coreectly"
+                    return message
+                message = "Password should contain min 9 and max 25 characters"
+                return message
+            message = "Password cannot have blank space or tabs"
+            return message
+        message = "Password should not be blank"
         return message
 
     def create(self, email, username, password, cpassword):
@@ -104,11 +106,3 @@ class User():
             message = "incorrect password"
             return message
         return dbdata
-
-    
-
-
-
-
-
-
