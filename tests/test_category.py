@@ -24,9 +24,18 @@ class TestCategory(unittest.TestCase):
         self.assertEqual("Category name cannot be blank.", new_category)
 
     def test_category_name_is_valid_length(self):
-        """ method to test if username is valid length"""
+        """ method to test if category  name is valid length"""
         long_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(31))
         invalid_names = [long_name, 'short']
         for catname in invalid_names:
             new_category = self.category.create_category(catname, self.email)
             self.assertEqual("Field must be between 6 and 30 characters long.", new_category)
+
+    def test_user_can_view_his_categories(self):
+        view_category = self.category.view_category(self.email)
+        self.assertEqual(1, view_category)
+
+    def test_returns_empty_if_user_lacks_categories(self):
+        self.email = 'stephen@gmail.com'
+        view_category = self.category.view_category(self.email)
+        self.assertEqual("Create your first category here >>>", view_category)
