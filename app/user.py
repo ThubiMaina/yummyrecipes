@@ -43,7 +43,7 @@ class User():
             self.password = password
             dbvalues = USERS[self.email]
             if self.password in dbvalues[1]:
-                return True
+                return 1
             message = "incorrect password"
             return message
         return dbdata
