@@ -58,13 +58,14 @@ class Category():
         self.catname = category_to_delete['catname']
         self.email = category_to_delete['email']
         if self.email == email:
+            del CATS[self.catid]
             CATS.insert(self.catid, {'catname': self.catname,
                                      'email': 'del' + self.email,
                                      'catid': self.catid})
             new_category = CATS[self.catid]
             new_mail = new_category['email']
             if new_mail != self.email:
-                self.email = new_mail
+                self.view_category(self.email)
                 return 1
             message = 'failed to delete'
             return message
@@ -86,9 +87,10 @@ class Category():
                             self.catname = valid_catname
                             self.email = email
                             self.catid = int(catid)
+                            del CATS[self.catid]
                             CATS.insert(self.catid, {'catname': self.catname,
-                                                    'email': self.email,
-                                                    'catid': self.catid})
+                                                     'email': self.email,
+                                                     'catid': self.catid})
                             updated_category = CATS[self.catid]
                             updated_catname = updated_category['catname']
                             if updated_catname == self.catname:
@@ -103,6 +105,13 @@ class Category():
             return message
         message = "Forbiden! Category does not exist"
         return message
+
+    def get_category_name(self, catid):
+        """ Method to get the category name for the placeholder """
+        self.catid = int(catid)
+        new_category = CATS[self.catid]
+        catname = new_category['catname']
+        return catname
 
     @staticmethod
     def check_category_name(category_name):
