@@ -37,7 +37,7 @@ class TestCategory(unittest.TestCase):
         self.assertEqual(1, view_category)
 
     def test_view_empty_categories(self):
-        """ method to test if user can view another users category"""
+        """ method to test what happens if user has no categories"""
         self.email = 'stephen@gmail.com'
         view_category = self.category.view_category(self.email)
         self.assertEqual("Create your first category here >>>", view_category)
@@ -73,4 +73,13 @@ class TestCategory(unittest.TestCase):
         category_update = self.category.update_category('foreign category', 'steve@gmail.com', 10)
         self.assertEqual("Forbiden! Category does not exist", category_update)
 
+    def test_update_invalid_category(self):
+        """ method to test if user can update blank category"""
+        category_update = self.category.update_category('   ', self.email, 1)
+        self.assertEqual("Category name cannot be blank.", category_update)
+
+    def test_update_short_category(self):
+        """ method to test if user can update out of range category"""
+        category_update = self.category.update_category('short', self.email, 1)
+        self.assertEqual("Field must be between 6 and 30 characters long.", category_update)
 
