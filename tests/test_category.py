@@ -3,11 +3,13 @@ import string
 import random
 import unittest
 from app.category import Category
+from app.category import CATS
 
 
 class TestCategory(unittest.TestCase):
     """class to test user case"""
     def setUp(self):
+        self.cats = CATS
         self.category = Category()
         self.catname = 'First Category'
         self.email = 'muthamass@gmail.com'
@@ -33,6 +35,7 @@ class TestCategory(unittest.TestCase):
 
     def test_view_categories(self):
         """ method to test if user can successfully see his categories"""
+        self.category.create_category(self.catname, self.email)
         view_category = self.category.view_category(self.email)
         self.assertEqual(1, view_category)
 
@@ -54,8 +57,9 @@ class TestCategory(unittest.TestCase):
 
     def test_update_category(self):
         """ method to test if user can update their category successfully"""
-        new_catname = "update category"
-        category_update = self.category.update_category(new_catname, self.email, 1)
+        size = len(self.cats)
+        self.category.create_category(self.catname, self.email)
+        category_update = self.category.update_category('update category', self.email, size)
         self.assertEqual(1, category_update)
 
     def test_update_same_name_category(self):
@@ -70,7 +74,7 @@ class TestCategory(unittest.TestCase):
 
     def test_update_outofrange_category(self):
         """ method to test if user can update out of range category"""
-        category_update = self.category.update_category('foreign category', 'steve@gmail.com', 10)
+        category_update = self.category.update_category('foreign category', 'steve@gmail.com', 20)
         self.assertEqual("Forbiden! Category does not exist", category_update)
 
     def test_update_invalid_category(self):
