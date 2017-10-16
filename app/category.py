@@ -76,28 +76,32 @@ class Category():
         size = len(CATS)
         if catid < size:
             store_category = CATS[catid]
-            store_catname = store_category['email']
-            valid_catname = self.check_category_name(catname)
-            if valid_catname != store_catname:
-                if valid_catname != "Field must be between 6 and 30 characters long.":
-                    if valid_catname != "Category name cannot be blank.":
-                        self.catname = valid_catname
-                        self.email = email
-                        self.catid = int(catid)
-                        CATS.insert(self.catid, {'catname': self.catname,
-                                                'email': self.email,
-                                                'catid': self.catid})
-                        updated_category = CATS[self.catid]
-                        updated_catname = updated_category['catname']
-                        if updated_catname == self.catname:
-                            return 1
-                        message = "Category Name"
-                        return message
+            store_catname = store_category['catname']
+            store_email = store_category['email']
+            if store_email == email:
+                valid_catname = self.check_category_name(catname)
+                if valid_catname != store_catname:
+                    if valid_catname != "Field must be between 6 and 30 characters long.":
+                        if valid_catname != "Category name cannot be blank.":
+                            self.catname = valid_catname
+                            self.email = email
+                            self.catid = int(catid)
+                            CATS.insert(self.catid, {'catname': self.catname,
+                                                    'email': self.email,
+                                                    'catid': self.catid})
+                            updated_category = CATS[self.catid]
+                            updated_catname = updated_category['catname']
+                            if updated_catname == self.catname:
+                                return 1
+                            message = "Category Name not updated"
+                            return message
+                        return valid_catname
                     return valid_catname
-                return valid_catname
-            message = "The name is still the same"
+                message = "The name is still the same"
+                return message
+            message = "Forbiden! Action Not allowed"
             return message
-        message = "Forbiden!Category does not exist"
+        message = "Forbiden! Category does not exist"
         return message
 
     @staticmethod
