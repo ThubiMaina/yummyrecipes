@@ -6,6 +6,6 @@ install:
   - pip install coveralls  
 script:
   - nosetests --with-coverage
-  - py.test --source=yummyrecipes tests/*
+  - coverage report
 after_success:
   - coveralls
