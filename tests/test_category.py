@@ -82,4 +82,3 @@ class TestCategory(unittest.TestCase):
         """ method to test if user can update out of range category"""
         category_update = self.category.update_category('short', self.email, 1)
         self.assertEqual("Field must be between 6 and 30 characters long.", category_update)
-
