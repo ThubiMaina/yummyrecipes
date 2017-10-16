@@ -18,7 +18,7 @@ class TestUser(unittest.TestCase):
         """ method to test for success in creating user account"""
         new_user = self.user.create(self.email, self.username, self.password, self.cpassword)
         self.assertEqual(1, new_user, "User Not Created")
-    
+
     def test_user_exists(self):
         """ method to test if user exists in the database"""
         result = self.user.check_email_in_db(self.email)
@@ -64,7 +64,7 @@ class TestUser(unittest.TestCase):
         """ method to test if username field is empty"""
         new_user = self.user.create('steve@gmail.com', '', self.password, self.cpassword)
         self.assertEqual("Username should not be blank", new_user)
-    
+
     def test_username_has_spaces(self):
         """ method to test if username contains trailing spaces"""
         invalid_usernames = [' muthama', 'muthama ', 'muth ama', '       ']
@@ -105,19 +105,17 @@ class TestUser(unittest.TestCase):
         new_user = self.user.create('steve@gmail.com', self.username, self.password, 'past')
         self.assertEqual("confirm password coreectly", new_user)
 
-    def test_if_user_can_login_with_invalid_email(self):
+    def test_login_with_invalid_email(self):
         """ Method to test if user can login if email not registered"""
         login = self.user.login('steve@gmail.com', self.password)
         self.assertEqual("Email not registered", login)
 
-    def test_if_user_can_login_with_invalid_password(self):
+    def test_invalid_password_login(self):
         """ Method to test if user can login with wrong password"""
         login = self.user.login(self.email, 'mypassword')
         self.assertEqual("incorrect password", login)
 
-    def test_user_can_login_successfully(self):
-        """ Method to test if user can login with wrong password"""
-        login = self.user.login(self.email, self.email)
-        self.assertTrue(login)
-
-    
+    def test_login_successfully(self):
+        """ Method to test if user can login successfully"""
+        login = self.user.login(self.email, self.password)
+        self.assertEqual(1, login)
