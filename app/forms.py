@@ -54,12 +54,11 @@ class LoginForm(FlaskForm):
         password: A string representing the user's password.
     """
     email = StringField('Email Address', [
-        validators.Length(min=6, max=50),
-        validators.InputRequired("email address cannot be blank."),
+        validators.Length(min=10, max=100),
+        validators.InputRequired("email address cannot be blank"),
         validators.Email("This field requires a valid email address")
     ])
     password = PasswordField('Password', [
         validators.Length(min=6, max=25),
-        validators.InputRequired("Password cannot be blank."),
+        validators.InputRequired("Password cannot be blank")
     ])
-
