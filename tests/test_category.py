@@ -55,17 +55,22 @@ class TestCategory(unittest.TestCase):
     def test_update_category(self):
         """ method to test if user can update their category successfully"""
         new_catname = "update category"
-        category_update = self.category.update_category(new_catname, self.email, 0)
+        category_update = self.category.update_category(new_catname, self.email, 1)
         self.assertEqual(1, category_update)
 
     def test_update_same_name_category(self):
         """ method to test if user can update their category with the same name"""
-        category_update = self.category.update_category('update category', self.email, 0)
+        category_update = self.category.update_category('update category', self.email, 1)
         self.assertEqual("The name is still the same", category_update)
 
     def test_update_foreign_category(self):
         """ method to test if user can update a foreign category"""
-        category_update = self.category.update_category('foreign category', 'steve@gmail.com', 0)
+        category_update = self.category.update_category('foreign category', 'steve@gmail.com', 1)
         self.assertEqual("Forbiden! Action Not allowed", category_update)
+
+    def test_update_outofrange_category(self):
+        """ method to test if user can update out of range category"""
+        category_update = self.category.update_category('foreign category', 'steve@gmail.com', 10)
+        self.assertEqual("Forbiden! Category does not exist", category_update)
 
 
